@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const galleryHtml = galleryItems.map(item => createGalleryItem(item)).join('');
   galleryContainer.innerHTML = galleryHtml;
 
-  // Initialize SimpleLightbox after the images have been added to the DOM
   const lightbox = new SimpleLightbox('.gallery a', {
     elements: galleryItems.map(item => ({
       src: item.original,
