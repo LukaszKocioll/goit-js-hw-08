@@ -18,18 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const galleryHtml = galleryItems.map(item => createGalleryItem(item)).join('');
   galleryContainer.innerHTML = galleryHtml;
 
-  galleryContainer.addEventListener('click', event => {
-    event.preventDefault();
-    const clickedElement = event.target;
-
-    if (clickedElement.classList.contains('gallery__image')) {
-      const source = clickedElement.dataset.source;
-
-      const instance = new SimpleLightbox(`
-        <img src="${source}" alt="${clickedElement.alt}">
-      `);
-
-      instance.open();
-    }
+  // Initialize SimpleLightbox after the images have been added to the DOM
+  const lightbox = new SimpleLightbox('.gallery a', {
+    elements: galleryItems.map(item => ({
+      src: item.original,
+      description: item.description
+    }))
   });
 });
