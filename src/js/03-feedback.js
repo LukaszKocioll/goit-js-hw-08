@@ -5,7 +5,7 @@ const THROTTLE_TIME = 500;
 
 const form = document.querySelector('.feedback-form');
 const { email, message } = form.elements;
-const formData = loadFromLocalStorage();
+let formData = loadFromLocalStorage(); // Używamy "let" zamiast "const"
 
 const inputEventHandler = throttle(() => {
   saveFormDataToLocalStorage();
@@ -39,10 +39,17 @@ function fillFormFromLocalStorage() {
 }
 
 function clearFormAndStorage() {
+  const clearedData = {
+    email: email.value,
+    message: message.value
+  };
+
   localStorage.removeItem(KEY_FEEDBACK_FORM_STATE);
   email.value = '';
   message.value = '';
-  formData.email = '';
+  formData.email = ''; 
   formData.message = '';
+
   console.log('Form data cleared.');
+  console.log('Cleared data:', clearedData);
 }
